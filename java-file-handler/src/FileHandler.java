@@ -3,9 +3,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.List;
 
-public class FileHandler {
+public class FileHandler implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public FileHandler() {}
 	
 	public void write(String fileName, String path, List<String> content) {
