@@ -1,3 +1,4 @@
+package business;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -5,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.List;
+
+import utils.HandleError;
 
 public class FileHandler implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,7 +22,7 @@ public class FileHandler implements Serializable {
 			
 			System.out.println("O arquivo " + fileName + " foi salvo em " + path);
 		} catch (IOException e) {
-			handleError(e);
+			HandleError.handleError(e);
 		}
 	}
 	
@@ -33,12 +36,10 @@ public class FileHandler implements Serializable {
 				linha = reader.readLine();
 			}
 		} catch (IOException e) {
-			handleError(e);
+			HandleError.handleError(e);
 		}
 	}
 	
-	public void handleError(Exception e) {
-		System.err.println("ERRO: " + e.getMessage());
-		e.printStackTrace();
-	}
+	// mostrar informações sobre um arquivo
+	// mostrar informações sobre pastas
 }
