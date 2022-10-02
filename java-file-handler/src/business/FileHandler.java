@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import exceptions.FileDoesNotExistsException;
+import exceptions.FolderDoesNotExistsException;
 import exceptions.IsADirectoryException;
+import exceptions.IsAFileException;
 import utils.HandleError;
 
 public class FileHandler implements Serializable {
@@ -68,28 +70,30 @@ public class FileHandler implements Serializable {
 	}
 	
 	public static void showDirectoryInfo(String path) {
-		File file = new File(path);
+		File dir = new File(path);
 		try {
-			if(!file.exists()) { throw new FileDoesNotExistsException("O arquivo informado não existe!"); }
-			if(file.isDirectory()) { throw new IsADirectoryException("O path informado é de uma pasta e não de um arquivo."); }
+			if(!dir.exists()) { throw new FolderDoesNotExistsException("A pasta informada não existe!"); }
+			if(dir.isFile()) { throw new IsAFileException("O path informado é de um arquivo e não de uma pasta."); }
 		
+			File[] listOfFiles = dir.listFiles();
+			
 			String message = (
-					file.getName() + "\n" +
-					file.getPath() + "\n" +
-					"O arquivo pode ser lido? " + file.canRead() + "\n" +
-					"O arquivo pode ser gravado? " + file.canWrite() + "\n" +
-					"Tamanho do arquivo: " + file.length()
-			)
-					.replace("true", "Sim")
-					.replace("false", "Não");
+					dir.getName() + "\n" +
+					dir.getPath() + "\n" +
+					"Quantidade de arquivos na pasta: " + dir.list().length + "\n" +
+					"Conteúdo do diretório: "
+			);
+			
+			for (int i = 0; i < listOfFiles.length; i++) {
+				message += "\n- " + listOfFiles[i].getName();
+			}
 			
 			System.out.print(message);
-		} catch (FileDoesNotExistsException e) {
-			HandleError.handleError(e);
-		} catch (IsADirectoryException e) {
-			HandleError.handleError(e);
 		} catch (Exception e) {
 			HandleError.handleError(e);
 		}
 	}
+	
+	// criar arquivo
+	// criar pasta
 }
