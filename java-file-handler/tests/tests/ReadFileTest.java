@@ -13,7 +13,13 @@ public class ReadFileTest implements Serializable {
 
 	public static void main(String[] args) {
 		try (Scanner sc = new Scanner(System.in).useLocale(Locale.US);) {
-			System.out.print("Digite o caminho para o arquivo que você deseja ler..." + "\n\n" + "Exemplos de formatos a ser seguidos: " + "\n" + "/home/pedro/file.txt" + "\n" + "blablabla" + "\n\n" + "Digite o nome do arquivo: ");
+			System.out.print(
+					"Digite o caminho para o arquivo que você deseja ler..." + "\n\n" + 
+					"Exemplos de formatos a ser seguidos: " + "\n" + 
+					"/home/pedro/file.txt" + "\n" + 
+					"C:\\Users\\pedro" + "\n\n" + 
+					"Digite o nome do arquivo: "
+			);
 			String path = sc.next();
 			
 			FileHandler fileHandler = new FileHandler();
